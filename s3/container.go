@@ -274,6 +274,7 @@ func getContentTypeFromMeta(meta map[string]*string) *string {
 	for key, val := range meta {
 		switch strings.ToLower(key) {
 		case "content-type":
+		case "content_type":
 		case "content type":
 		case "contenttype":
 			return val
