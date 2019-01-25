@@ -125,6 +125,7 @@ func (c *container) Put(name string, r io.Reader, size int64, metadata map[strin
 		Bucket:        aws.String(c.name), // Required
 		Key:           aws.String(name),   // Required
 		ContentLength: aws.Int64(size),
+		ContentType:   getContentTypeFromMeta(mdPrepped),
 		Body:          bytes.NewReader(content),
 		Metadata:      mdPrepped, // map[string]*string
 	}
@@ -266,4 +267,18 @@ func parseMetadata(md map[string]*string) (map[string]interface{}, error) {
 		m[k] = *value
 	}
 	return m, nil
+}
+
+// getContentTypeFromMeta gets Content Type from meta information
+func getContentTypeFromMeta(meta map[string]*string) *string {
+	for key, val := range meta {
+		switch strings.ToLower(key) {
+		case "content-type":
+		case "content type":
+		case "contenttype":
+			return val
+		}
+	}
+
+	return nil
 }
