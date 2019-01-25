@@ -46,7 +46,7 @@
   version = "0.8.0"
 
 [[constraint]]
-  branch = "release-branch.go1.11"
+  branch = "release-branch.go1.10"
   name = "golang.org/x/net"
 
 [[constraint]]

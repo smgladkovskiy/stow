@@ -157,15 +157,15 @@
   version = "v1.2.0"
 
 [[projects]]
-  branch = "release-branch.go1.11"
-  digest = "1:3837669a90a891c317803d065189d9ff9a743fae1e9583be2c4c817c004d3fd1"
+  branch = "release-branch.go1.10"
+  digest = "1:57cdbf612d6928a01850051b5c09972262244ae131a40dfea4c37fd525742db5"
   name = "golang.org/x/net"
   packages = [
     "context",
     "context/ctxhttp",
   ]
   pruneopts = ""
-  revision = "a4630153038d3cb8c57f83d95200aea356145cf5"
+  revision = "0ed95abb35c445290478a5348a7b38bb154135fd"
 
 [[projects]]
   branch = "master"

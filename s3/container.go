@@ -122,12 +122,12 @@ func (c *container) Put(name string, r io.Reader, size int64, metadata map[strin
 	}
 
 	params := &s3.PutObjectInput{
-		Bucket:        aws.String(c.name), // Required
-		Key:           aws.String(name),   // Required
-		ContentLength: aws.Int64(size),
-		ContentType:   getContentTypeFromMeta(mdPrepped),
-		Body:          bytes.NewReader(content),
-		Metadata:      mdPrepped, // map[string]*string
+		Bucket:          aws.String(c.name), // Required
+		Key:             aws.String(name),   // Required
+		ContentLength:   aws.Int64(size),
+		ContentEncoding: getContentEncodingFromMeta(mdPrepped),
+		Body:            bytes.NewReader(content),
+		Metadata:        mdPrepped, // map[string]*string
 	}
 
 	// Only Etag is returned.
@@ -269,14 +269,14 @@ func parseMetadata(md map[string]*string) (map[string]interface{}, error) {
 	return m, nil
 }
 
-// getContentTypeFromMeta gets Content Type from meta information
-func getContentTypeFromMeta(meta map[string]*string) *string {
+// getContentEncodingFromMeta gets Content-Encoding from meta information
+func getContentEncodingFromMeta(meta map[string]*string) *string {
 	for key, val := range meta {
 		switch strings.ToLower(key) {
-		case "content-type":
-		case "content_type":
-		case "content type":
-		case "contenttype":
+		case "content-encoding":
+		case "content_encoding":
+		case "content encoding":
+		case "contentencoding":
 			return val
 		}
 	}
